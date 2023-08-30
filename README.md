@@ -1,3 +1,5 @@
-# Starknet Forge Template
+# Build and test
 
-This repository is a basic project for Starknet Forge - testing tool that is a part of Starknet Foundry. 
+```
+snforge
+```
