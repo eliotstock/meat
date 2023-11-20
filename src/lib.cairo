@@ -8,7 +8,7 @@ trait IMeatRaffle<TContractState> {
     // Writes:
     fn set_ticket_price(ref self: TContractState, amount: felt252);
     fn buy_tickets(ref self: TContractState, count: felt252);
-    fn run(ref self: TContractState);
+    fn run_raffle(ref self: TContractState);
 }
 
 #[starknet::contract]
@@ -61,7 +61,7 @@ mod MeatRaffle {
             // self.balance.write(self.balance.read() + count);
         }
 
-        fn run(ref self: ContractState) {
+        fn run_raffle(ref self: ContractState) {
             // TODO:
             //   anyone can call this
             //   if some tickets remain to be sold, panic
