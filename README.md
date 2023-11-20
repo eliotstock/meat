@@ -1,6 +1,6 @@
 # Meat raffle
 
-What Starknet really needs is a meat raffle protocol: buy tickets and win NFTs of raw meat.
+What Starknet really needs is a meat raffle protocol: buy tickets and win NFTs repicting raw meat.
 
 Disclosure: This is mainly a Cairo learning project.
 
@@ -10,6 +10,6 @@ Disclosure: This is mainly a Cairo learning project.
 snforge
 ```
 
-## Where can I play
+## Where can I buy a raffle ticket
 
 Nowhere yet I'm still building it for goodness sake.

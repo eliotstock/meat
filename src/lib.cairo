@@ -15,6 +15,36 @@ trait IMeatRaffle<TContractState> {
 mod MeatRaffle {
     use starknet::{get_caller_address, ContractAddress};
 
+    #[derive(Drop, Serde, Copy, starknet::Store)]
+    struct Ticket {
+        // Max 255 tickets per raffle
+        id: u8,
+
+        // Holder of this ticket
+        holder: ContractAddress
+    }
+
+    #[derive(Drop, Serde, Copy, starknet::Store)]
+    struct Raffle {
+        // Max 65_535 raffles ever
+        id: u16,
+
+        // Slab of raw meat
+        prizeNft: ContractAddress,
+
+        // Price of a single ticket
+        pricePerTicketInGwei: u64,
+
+        // Equal to 99% of the price per ticket times the number of tickets
+        prizeAmountInGwei: u64,
+
+        // List of tickets for this raffle, both sold and not yet sold
+        // TODO: Fix: `error: Not a type`
+        // Can't put Arrays in storage in Cairo. Consider using a LegacyMap
+        // instead, and storing the length separately.
+        tickets: ArrayTrait::<Ticket>
+    }
+
     #[storage]
     struct Storage {
         ticket_price_current: felt252, 
