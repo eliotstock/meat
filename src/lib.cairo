@@ -42,7 +42,7 @@ mod MeatRaffle {
         // TODO: Fix: `error: Not a type`
         // Can't put Arrays in storage in Cairo. Consider using a LegacyMap
         // instead, and storing the length separately.
-        tickets: ArrayTrait::<Ticket>
+        // tickets: ArrayTrait::<Ticket>
     }
 
     #[storage]

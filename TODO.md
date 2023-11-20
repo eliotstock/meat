@@ -24,9 +24,12 @@
     1. If so, show celebratory UX
 1. Buy one or more tickets
     1. If I bought the last ticket, run the raffle
+        1. Is generating a random number hard on Starknet?
+        1. Yes, for high levels of randomness
+        1. Maybe not, if we just base it on the has of the previous block?
     1. Suspenseful UX while the raffle runs
 
-## State
+## Data structures
 
 1. Ticket struct
     1. ID, auto incrementing integer, unique for this raffle only
@@ -37,10 +40,13 @@
     1. Price per ticket in ETH or gwei
     1. Prize amount in ETH or gwei, equal to 99% of the price per ticket times the number of tickets
     1. List of ticket instances (sorted)
-1. Global
-    1. Admin user (address, same as deployer)
-    1. List of raffle instances, current raffle last
-    1. List of NFT addresses to be used for subsequent raffle prizes
-    1. Price per ticket in ETH or gwei for the next raffle to start
-    1. Number of tickets for the next raffle to start
-    1. Run/stop boolean for admin to control whether another raffle will start as soon as the last ticket for this one is sold
+        1. Implementation: Cairo has no native support for storing arrays. We can write our own implementation of the Store trait for our custom types, but LegacyMap will be better performing if we know the keys.
+
+## Storage
+
+1. Admin user (address, same as deployer)
+1. List of raffle instances, current raffle last
+1. List of NFT addresses to be used for subsequent raffle prizes
+1. Price per ticket in ETH or gwei for the next raffle to start
+1. Number of tickets for the next raffle to start
+1. Run/stop boolean for admin to control whether another raffle will start as soon as the last ticket for this one is sold
