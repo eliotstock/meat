@@ -5,17 +5,26 @@
 ### Before participating
 
 1. See the meat NFT that's up for grabs in the current raffle
+    1. `get_current_prize()`
 1. See what the prize value is in the current raffle
+    1. `get_current_prize_value()`
 1. See how many tickets remain to be sold before the current raffle runs
+    1. `get_current_tickets_remaining()`
 1. See the winners (identified by Stark ID or address) of all previous raffles
+    1. `get_past_winners()`
 1. See the prize NFTs of all previous raffles
+    1. `get_past_prizes()`
 
 ### Admin interactions
 
 1. Set the ticket price in ETH for the next raffle to start
+    1. `set_next_ticket_price()`
 1. Set the number of tickets for the next raffle to start
+    1. `set_next_ticket_count()`
 1. Set the run/stop boolean to control whether another raffle will start as soon as the last ticket for this one is sold
+    1. `set_run()`
 1. Contribute the NFT for the next raffle, or as many subsequent raffles as I like
+    1. `push_prize()`
 
 ### Participation
 
@@ -40,13 +49,15 @@
     1. Price per ticket in ETH or gwei
     1. Prize amount in ETH or gwei, equal to 99% of the price per ticket times the number of tickets
     1. List of ticket instances (sorted)
-        1. Implementation: Cairo has no native support for storing arrays. We can write our own implementation of the Store trait for our custom types, but LegacyMap will be better performing if we know the keys.
+        1. Implementation: Cairo has no native support for storing arrays. We can write our own implementation of the Store trait for our custom types, but `LegacyMap` will be better performing if we know the keys.
 
 ## Storage
 
-1. Admin user (address, same as deployer)
-1. List of raffle instances, current raffle last
-1. List of NFT addresses to be used for subsequent raffle prizes
-1. Price per ticket in ETH or gwei for the next raffle to start
-1. Number of tickets for the next raffle to start
-1. Run/stop boolean for admin to control whether another raffle will start as soon as the last ticket for this one is sold
+1. Admin user (address, same as deployer), `ContractAddress`.
+1. List of raffle instances, current raffle last.
+    1. But use a `LegacyMap` rather than an `Array`. Keys: raffle ID, values: Raffle instances.
+1. List of NFT addresses to be used for subsequent raffle prizes.
+    1. But use a `LegacyMap` rather than an `Array`. Keys: raffle ID, values: `ContractAddress` for the NFT.
+1. Price per ticket in ETH or gwei for the next raffle to start, `u64`.
+1. Number of tickets for the next raffle to start, `u8`.
+1. Run/stop boolean for admin to control whether another raffle will start as soon as the last ticket for this one is sold, `bool`.
